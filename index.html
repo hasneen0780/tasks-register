@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سياسة الخصوصية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4A6FA5;
+            --secondary-color: #FDB813;
+            --dark-bg: #121212;
+            --light-bg: #F8F9FA;
+            --text-dark: #333;
+            --text-light: #FFF;
+            --card-bg: #FFFFFF;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Noto Sans Arabic', Tahoma, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.7;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #6C8BC7);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(30deg);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            background: white;
+            color: var(--primary-color);
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .logo p {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+
+        .privacy-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .dark-mode .privacy-container {
+            background: #1E1E1E;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .dark-mode .section-title {
+            color: var(--secondary-color);
+            border-bottom-color: var(--secondary-color);
+        }
+
+        .section-title i {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .dark-mode .section-title i {
+            background: var(--secondary-color);
+            color: #121212;
+        }
+
+        .content-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .content-section h3 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dark-mode .content-section h3 {
+            color: var(--secondary-color);
+        }
+
+        .content-section p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .content-section ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .content-section li {
+            margin-bottom: 0.8rem;
+            padding-right: 10px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(74, 111, 165, 0.1), rgba(108, 139, 199, 0.1));
+            border-right: 5px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+
+        .dark-mode .highlight-box {
+            background: rgba(253, 184, 19, 0.1);
+            border-right-color: var(--secondary-color);
+        }
+
+        .permissions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 1.5rem 0;
+        }
+
+        .permission-card {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .dark-mode .permission-card {
+            background: #2D2D2D;
+        }
+
+        .permission-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .permission-card.granted {
+            border-top: 5px solid #4CAF50;
+        }
+
+        .permission-card.not-granted {
+            border-top: 5px solid #F44336;
+        }
+
+        .permission-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .permission-card.granted h4 i {
+            color: #4CAF50;
+        }
+
+        .permission-card.not-granted h4 i {
+            color: #F44336;
+        }
+
+        .data-flow {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .flow-item {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 25px;
+            margin: 0 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .dark-mode .flow-item {
+            background: var(--secondary-color);
+            color: #121212;
+        }
+
+        .flow-item::after {
+            content: "→";
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .dark-mode .flow-item::after {
+            color: var(--secondary-color);
+        }
+
+        .flow-item:last-child::after {
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-color), #6C8BC7);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .dark-mode footer {
+            background: linear-gradient(135deg, #1E1E1E, #2D2D2D);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .contact-info {
+            text-align: right;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 10px;
+        }
+
+        .contact-info p {
+            margin-bottom: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .dark-mode .back-to-top {
+            background: var(--secondary-color);
+            color: #121212;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .privacy-container {
+                padding: 1.5rem;
+            }
+            
+            .permissions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .flow-item {
+                display: block;
+                margin: 10px 0;
+            }
+            
+            .flow-item::after {
+                content: "↓";
+                right: 50%;
+                top: auto;
+                bottom: -25px;
+                transform: translateX(50%);
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-info {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <h1>سجلاتي</h1>
+                        <p>يومياتك الخاصة بك</p>
+                    </div>
+                </div>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                    <span>الوضع الليلي</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <div class="privacy-container">
+                <h2 class="section-title">
+                    <i class="fas fa-shield-alt"></i>
+                    سياسة الخصوصية لتطبيق "سجلاتي"
+                </h2>
+                
+                <div class="content-section">
+                    <h3><i class="fas fa-info-circle"></i> 1. مقدمة</h3>
+                    <p>نحن في تطبيق "سجلاتي" نحرص على خصوصيتك وسرية بياناتك. سياسة الخصوصية هذه توضح كيفية جمع واستخدام وحماية المعلومات الشخصية التي تشاركها معنا عند استخدام تطبيقنا.</p>
+                    <p>نحن نؤمن بحقك في الخصوصية ونلتزم بحماية جميع المعلومات التي تشاركها معنا. جميع البيانات التي تدخلها في التطبيق تبقى ملكًا لك.</p>
+                </div>
+
+                <div class="content-section">
+                    <h3><i class="fas fa-database"></i> 2. المعلومات التي نجمعها</h3>
+                    
+                    <h4><i class="fas fa-keyboard"></i> 2.1 المعلومات التي تقدمها:</h4>
+                    <ul>
+                        <li>نصوص السجلات واليوميات التي تكتبها</li>
+                        <li>العناوين والتصنيفات</li>
+                        <li>التواريخ والمواعيد</li>
+                        <li>الحالة المزاجية (الإيموجي)</li>
+                        <li>التفضيلات الشخصية (الوضع النهاري/الليلي)</li>
+                    </ul>
+                    
+                    <h4><i class="fas fa-cogs"></i> 2.2 المعلومات التي نجمعها تلقائياً:</h4>
+                    <ul>
+                        <li>إعدادات التطبيق</li>
+                        <li>تفضيلات الواجهة</li>
+                        <li>الإحصائيات المجمعة (بدون معلومات تعريف شخصية)</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box">
+                    <h4><i class="fas fa-bullhorn"></i> ملاحظة هامة:</h4>
+                    <p>جميع بياناتك الشخصية والسجلات يتم تخزينها بشكل <strong>محلي فقط</strong> على جهازك ولا يتم إرسالها إلى أي خوادم خارجية.</p>
+                </div>
+
+                <div class="content-section">
+                    <h3><i class="fas fa-tasks"></i> 3. كيفية استخدام المعلومات</h3>
+                    <p>نستخدم المعلومات التي نجمعها من أجل:</p>
+                    <ul>
+                        <li>حفظ وعرض سجلاتك الشخصية</li>
+                        <li>تخصيص تجربتك في التطبيق</li>
+                        <li>تحسين أداء التطبيق ووظائفه</li>
+                        <li>تقديم إحصائيات مجمعة (بدون بيانات شخصية)</li>
+                        <li>تمكين ميزة البحث والتصفية داخل سجلاتك</li>
+                    </ul>
+                </div>
+
+                <div class="content-section">
+                    <h3><i class="fas fa-hdd"></i> 4. تخزين البيانات</h3>
+                    
+                    <h4><i class="fas fa-mobile-alt"></i> 4.1 التخزين المحلي:</h4>
+                    <ul>
+                        <li>يتم تخزين جميع بياناتك بشكل محلي على جهازك</li>
+                        <li>نستخدم SQLite Database لتخزين السجلات</li>
+                        <li>إعدادات التطبيق يتم حفظها باستخدام Shared Preferences</li>
+                        <li>البيانات تبقى على جهازك حتى تقوم أنت بحذفها</li>
+                    </ul>
+                    
+                    <h4><i class="fas fa-lock"></i> 4.2 الأمان:</h4>
+                    <ul>
+                        <li>البيانات مشفرة ومحمية بآليات أمان الجهاز</li>
+                        <li>لا يمكن الوصول إلى بياناتك إلا من خلال التطبيق نفسه</li>
+                        <li>لا نرسل أي بيانات إلى خوادم خارجية</li>
+                        <li>لا نشارك بياناتك مع أطراف ثالثة</li>
+                    </ul>
+                </div>
+
+                <div class="data-flow">
+                    <h3><i class="fas fa-project-diagram"></i> مسار البيانات</h3>
+                    <div class="flow-item">تطبيق سجلاتي</div>
+                    <div class="flow-item">التخزين المحلي</div>
+                    <div class="flow-item">جهازك فقط</div>
+                </div>
+
+                <div class="content-section">
+                    <h3><i class="fas fa-sync-alt"></i> 5. مزامنة البيانات</h3>
+                    <p><strong>حاليا لا نقدم خدمة مزامنة البيانات بين الأجهزة</strong></p>
+                    <ul>
+                        <li>جميع البيانات تبقى محفوظة فقط على جهازك</li>
+                        <li>لا يتم تخزين نسخ من بياناتك على السحابة</li>
+                        <li>ننصح بعمل نسخ احتياطية منتظمة من بياناتك عبر ميزة التصدير</li>
+                        <li>يمكنك نقل البيانات يدوياً بين الأجهزة عبر تصدير واستيراد الملفات</li>
+                    </ul>
+                </div>
+
+                <div class="content-section">
+                    <h3><i class="fas fa-file-export"></i> 6. تصدير البيانات</h3>
+                    <p>يتيح لك التطبيق تصدير سجلاتك إلى ملف نصي:</p>
+                    <ul>
+                        <li>يتم إنشاء الملف على جهازك فقط</li>
+                        <li>يمكنك مشاركة الملف مع نفسك عبر وسائل أخرى</li>
+                        <li>نحن لا نتحكم في الملف بعد تصديره</li>
+                        <li>أنت المسؤول الوحيد عن حماية الملفات المصدرة</li>
+                        <li>التطبيق لا يملك القدرة على الوصول إلى الملفات المصدرة</li>
+                    </ul>
+                </div>
+
+                <div class="content-section">
+                    <h3><i class="fas fa-user-shield"></i> 7. صلاحيات التطبيق</h3>
+                    
+                    <div class="permissions-grid">
+                        <div class="permission-card granted">
+                            <h4><i class="fas fa-check-circle"></i> صلاحيات مطلوبة</h4>
+                            <p><strong>الوصول إلى التخزين:</strong> لتصدير واستيراد الملفات</p>
+                            <p><strong>الإنترنت (اختياري):</strong> للتحقق من التحديثات</p>
+                        </div>
+                        
+                        <div class="permission-card not-granted">
+                            <h4><i class="fas fa-times-circle"></i> صلاحيات لا نطلبها</h4>
+                            <p><strong>جهات الاتصال:</strong> لا نطلب الوصول إليها</p>
+                            <p><strong>الكاميرا:</strong> لا نطلب الوصول إليها</p>
+                            <p><strong>الميكروفون:</strong> لا نطلب الوصول إليه</p>
+                            <p><strong>الموقع:</strong> لا نطلب الوصول إليه</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h3><i class="fas fa-child"></i> 8. خصوصية الأطفال</h3>
+                    <p>تطبيق "سجلاتي" لا يجمع عن قصد أي معلومات من الأطفال دون سن 13 عامًا.</p>
+                    <p>إذا كنت والدًا أو وصيًا وتعتقد أن طفلك قد قدم لنا معلومات شخصية، يرجى الاتصال بنا وسنعمل على حذف تلك المعلومات.</p>
+                </div>
+
+                <div class="content-section">
+                    <h3><i class="fas fa-file-contract"></i> 9. التغييرات في سياسة الخصوصية</h3>
+                    <p>قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سنخطرك بأي تغييرات عن طريق نشر سياسة الخصوصية الجديدة على هذه الصفحة.</p>
+                    <p>ننصحك بمراجعة سياسة الخصوصية هذه بشكل دوري لأي تغييرات. التغييرات على هذه السياسة فعالة عندما يتم نشرها على هذه الصفحة.</p>
+                </div>
+
+                <div class="content-section">
+                    <h3><i class="fas fa-envelope"></i> 10. الاتصال بنا</h3>
+                    <p>إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه، يرجى الاتصال بنا عبر:</p>
+                    <div class="highlight-box">
+                        <p><i class="fas fa-envelope"></i> البريد الإلكتروني: lyhasneen70@gmail.com</p>
+                        <p><i class="fas fa-calendar"></i> آخر تحديث: ١ يناير ٢٠٢٤</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4><i class="fas fa-heart"></i> شكرًا لثقتك بنا</h4>
+                    <p>نشكرك على استخدام تطبيق "سجلاتي". نحن ملتزمون بحماية خصوصيتك وتقديم تجربة آمنة وخاصة لتسجيل يومياتك وأفكارك.</p>
+                    <p>تذكر أن جميع بياناتك تبقى ملكًا لك وأنت تتحكم بها بالكامل.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="app-info">
+                    <h3><i class="fas fa-book"></i> تطبيق سجلاتي</h3>
+                    <p>يومياتك الخاصة بك - آمنة وخاصة</p>
+                </div>
+                
+                <div class="contact-info">
+                    <h3><i class="fas fa-headset"></i> الدعم والاتصال</h3>
+                    <p>lyhasneen70@gmail.com</p>
+                    <p>متاح للرد على الاستفسارات</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© ٢٠٢٤ تطبيق سجلاتي. جميع الحقوق محفوظة.</p>
+                <p>تم تصميم هذا التطبيق مع التركيز على الخصوصية والأمان.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        const themeText = themeToggle.querySelector('span');
+        
+        // Check for saved theme or prefer-color-scheme
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const currentTheme = localStorage.getItem('theme');
+        
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            document.body.classList.add('dark-mode');
+            themeIcon.className = 'fas fa-sun';
+            themeText.textContent = 'الوضع النهاري';
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeIcon.className = 'fas fa-sun';
+                themeText.textContent = 'الوضع النهاري';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeIcon.className = 'fas fa-moon';
+                themeText.textContent = 'الوضع الليلي';
+            }
+        });
+        
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+        
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Highlight current section on scroll
+        const sections = document.querySelectorAll('.content-section');
+        
+        function highlightOnScroll() {
+            const scrollPosition = window.pageYOffset + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Initialize sections with animation
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+        
+        window.addEventListener('scroll', highlightOnScroll);
+        window.addEventListener('load', highlightOnScroll);
+    </script>
+</body>
+</html>
