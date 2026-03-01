@@ -3,692 +3,864 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سياسة الخصوصية</title>
+    <title>سياسة الخصوصية - تطبيق سجلاتي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #4A6FA5;
-            --secondary-color: #FDB813;
-            --dark-bg: #121212;
-            --light-bg: #F8F9FA;
-            --text-dark: #333;
-            --text-light: #FFF;
-            --card-bg: #FFFFFF;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Noto Sans Arabic', Tahoma, sans-serif;
+            font-family: 'Tajawal', 'Segoe UI', 'Noto Sans Arabic', sans-serif;
         }
 
         body {
-            background-color: var(--light-bg);
-            color: var(--text-dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            color: #2c3e50;
             line-height: 1.7;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body.dark-mode {
-            background-color: var(--dark-bg);
-            color: var(--text-light);
+            background: linear-gradient(135deg, #1a1e2b 0%, #2d3349 100%);
+            color: #ffffff;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 20px;
         }
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--primary-color), #6C8BC7);
-            color: white;
-            padding: 2rem 0;
-            box-shadow: var(--shadow);
+        /* زر الوضع الليلي المتحرك */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #667eea;
+            transition: all 0.4s;
+            border: 2px solid transparent;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        body.dark-mode .theme-toggle {
+            background: #2d3349;
+            color: #ffd700;
+            border-color: #ffd700;
+        }
+
+        /* شريط التقدم */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #ffd700);
+            z-index: 10000;
+            transition: width 0.3s;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.7);
+        }
+
+        /* البطاقة الرئيسية */
+        .privacy-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 40px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.15);
+            padding: 50px;
+            margin: 80px 0;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transform: translateY(0);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        body.dark-mode .privacy-card {
+            background: rgba(45, 51, 73, 0.95);
+            backdrop-filter: blur(20px);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* الهيدر */
+        .privacy-header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .privacy-header::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 30px;
+            opacity: 0.1;
+            filter: blur(30px);
+        }
+
+        .privacy-header i {
+            font-size: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .privacy-header h1 {
+            font-size: 56px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea, #764ba2, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .privacy-header p {
+            font-size: 20px;
+            color: #64748b;
+            background: rgba(102, 126, 234, 0.1);
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        body.dark-mode .privacy-header p {
+            color: #e2e8f0;
+            background: rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.2);
+        }
+
+        /* كل قسم */
+        .section {
+            background: white;
+            border-radius: 30px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            transition: all 0.4s;
             position: relative;
             overflow: hidden;
         }
 
-        header::before {
-            content: "";
+        body.dark-mode .section {
+            background: #2d3349;
+            border-color: rgba(255, 215, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .section:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            opacity: 0.05;
+            border-radius: 0 30px 0 100px;
+        }
+
+        .section h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        body.dark-mode .section h2 {
+            color: #ffd700;
+        }
+
+        .section h2 i {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .section h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 25px 0 15px;
+            color: #4a5568;
+            padding-right: 15px;
+            border-right: 5px solid #667eea;
+        }
+
+        body.dark-mode .section h3 {
+            color: #ffd700;
+            border-right-color: #ffd700;
+        }
+
+        .section p {
+            font-size: 18px;
+            color: #4a5568;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        body.dark-mode .section p {
+            color: #e2e8f0;
+        }
+
+        .section ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .section li {
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-right: 35px;
+            position: relative;
+            color: #4a5568;
+        }
+
+        body.dark-mode .section li {
+            color: #e2e8f0;
+        }
+
+        .section li::before {
+            content: '✨';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+        }
+
+        /* بطاقات الصلاحيات */
+        .permissions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .permission-card {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s;
+            border: 1px solid transparent;
+        }
+
+        body.dark-mode .permission-card {
+            background: linear-gradient(135deg, #363d5a, #2d3349);
+        }
+
+        .permission-card.granted {
+            border-color: #10b981;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
+        }
+
+        .permission-card.not-granted {
+            border-color: #ef4444;
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.2);
+        }
+
+        .permission-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+        }
+
+        .permission-card i {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .permission-card.granted i {
+            color: #10b981;
+        }
+
+        .permission-card.not-granted i {
+            color: #ef4444;
+        }
+
+        .permission-card h4 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .permission-card p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        /* خريطة تدفق البيانات */
+        .flow-map {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .flow-node {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+            animation: pulseNode 2s infinite;
+            position: relative;
+        }
+
+        @keyframes pulseNode {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .flow-node i {
+            margin-left: 10px;
+        }
+
+        .flow-arrow {
+            font-size: 30px;
+            color: #667eea;
+            animation: moveArrow 1.5s infinite;
+        }
+
+        body.dark-mode .flow-arrow {
+            color: #ffd700;
+        }
+
+        @keyframes moveArrow {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+
+        /* بطاقة الإبراز */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 30px;
+            padding: 35px;
+            margin: 30px 0;
+            border: 2px solid #667eea;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
             position: absolute;
             top: -50%;
             right: -50%;
             width: 200%;
             height: 200%;
-            background: rgba(255, 255, 255, 0.05);
-            transform: rotate(30deg);
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
         }
 
-        .header-content {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        body.dark-mode .highlight-box {
+            border-color: #ffd700;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
         }
 
-        .logo i {
-            font-size: 2.5rem;
-            background: white;
-            color: var(--primary-color);
-            padding: 15px;
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .logo h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-        }
-
-        .logo p {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin-top: 5px;
-        }
-
-        .theme-toggle {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* Main Content */
-        main {
-            padding: 3rem 0;
-        }
-
-        .privacy-container {
-            background: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            padding: 3rem;
-            margin-bottom: 2rem;
-        }
-
-        .dark-mode .privacy-container {
-            background: #1E1E1E;
-        }
-
-        .section-title {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 10px;
-            border-bottom: 3px solid var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .dark-mode .section-title {
-            color: var(--secondary-color);
-            border-bottom-color: var(--secondary-color);
-        }
-
-        .section-title i {
-            background: var(--primary-color);
-            color: white;
-            padding: 10px;
-            border-radius: 10px;
-        }
-
-        .dark-mode .section-title i {
-            background: var(--secondary-color);
-            color: #121212;
-        }
-
-        .content-section {
-            margin-bottom: 2.5rem;
-        }
-
-        .content-section h3 {
-            color: var(--primary-color);
-            font-size: 1.4rem;
-            margin: 1.5rem 0 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .dark-mode .content-section h3 {
-            color: var(--secondary-color);
-        }
-
-        .content-section p {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .content-section ul {
-            margin: 1rem 0 1rem 2rem;
-        }
-
-        .content-section li {
-            margin-bottom: 0.8rem;
-            padding-right: 10px;
-        }
-
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(74, 111, 165, 0.1), rgba(108, 139, 199, 0.1));
-            border-right: 5px solid var(--primary-color);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin: 1.5rem 0;
-        }
-
-        .dark-mode .highlight-box {
-            background: rgba(253, 184, 19, 0.1);
-            border-right-color: var(--secondary-color);
-        }
-
-        .permissions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 1.5rem 0;
-        }
-
-        .permission-card {
-            background: var(--light-bg);
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-        }
-
-        .dark-mode .permission-card {
-            background: #2D2D2D;
-        }
-
-        .permission-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .permission-card.granted {
-            border-top: 5px solid #4CAF50;
-        }
-
-        .permission-card.not-granted {
-            border-top: 5px solid #F44336;
-        }
-
-        .permission-card h4 {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .permission-card.granted h4 i {
-            color: #4CAF50;
-        }
-
-        .permission-card.not-granted h4 i {
-            color: #F44336;
-        }
-
-        .data-flow {
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        .flow-item {
-            display: inline-block;
-            background: var(--primary-color);
-            color: white;
-            padding: 15px 25px;
-            margin: 0 10px;
-            border-radius: 10px;
-            font-weight: bold;
-            position: relative;
-        }
-
-        .dark-mode .flow-item {
-            background: var(--secondary-color);
-            color: #121212;
-        }
-
-        .flow-item::after {
-            content: "→";
-            position: absolute;
-            right: -25px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.5rem;
-            color: var(--primary-color);
-        }
-
-        .dark-mode .flow-item::after {
-            color: var(--secondary-color);
-        }
-
-        .flow-item:last-child::after {
-            display: none;
-        }
-
-        /* Footer */
+        /* الفوتر */
         footer {
-            background: linear-gradient(135deg, var(--primary-color), #6C8BC7);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50px 50px 0 0;
+            padding: 60px 40px;
             color: white;
-            padding: 2rem 0;
-            text-align: center;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .dark-mode footer {
-            background: linear-gradient(135deg, #1E1E1E, #2D2D2D);
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            opacity: 0.1;
         }
 
         .footer-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-info h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
+            gap: 10px;
         }
 
-        .contact-info {
-            text-align: right;
-        }
-
-        .contact-info h3 {
+        .footer-info p {
+            font-size: 18px;
+            opacity: 0.9;
             margin-bottom: 10px;
         }
 
+        .contact-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 30px;
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
         .contact-info p {
-            margin-bottom: 5px;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .copyright {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            background: var(--primary-color);
-            color: white;
-            width: 50px;
-            height: 50px;
+        .contact-info i {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s;
-            z-index: 1000;
         }
 
-        .dark-mode .back-to-top {
-            background: var(--secondary-color);
-            color: #121212;
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 16px;
+        }
+
+        /* زر العودة للأعلى */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: all 0.4s;
+            z-index: 9999;
+            border: 2px solid white;
         }
 
         .back-to-top:hover {
-            transform: translateY(-5px);
+            transform: scale(1.1) rotate(360deg);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
         }
 
-        /* Responsive */
+        /* تصميم متجاوب */
         @media (max-width: 768px) {
-            .header-content {
+            .privacy-card {
+                padding: 30px 20px;
+            }
+
+            .privacy-header h1 {
+                font-size: 36px;
+            }
+
+            .section {
+                padding: 25px;
+            }
+
+            .section h2 {
+                font-size: 26px;
+            }
+
+            .flow-map {
                 flex-direction: column;
-                text-align: center;
-                gap: 20px;
             }
-            
-            .privacy-container {
-                padding: 1.5rem;
+
+            .flow-arrow {
+                transform: rotate(90deg);
             }
-            
+
             .permissions-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .flow-item {
-                display: block;
-                margin: 10px 0;
-            }
-            
-            .flow-item::after {
-                content: "↓";
-                right: 50%;
-                top: auto;
-                bottom: -25px;
-                transform: translateX(50%);
-            }
-            
+
             .footer-content {
-                flex-direction: column;
-                text-align: center;
+                grid-template-columns: 1fr;
             }
-            
-            .contact-info {
-                text-align: center;
+
+            .theme-toggle {
+                top: 10px;
+                left: 10px;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Back to Top Button -->
-    <div class="back-to-top" id="backToTop">
+    <!-- شريط التقدم -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- زر الوضع الليلي -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- زر العودة للأعلى -->
+    <button class="back-to-top" id="backToTop">
         <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <div class="container">
+        <!-- البطاقة الرئيسية -->
+        <div class="privacy-card">
+            <!-- الهيدر -->
+            <div class="privacy-header">
+                <i class="fas fa-shield-halos"></i>
+                <h1>سياسة الخصوصية</h1>
+                <p>آخر تحديث: 15 فبراير 2024</p>
+            </div>
+
+            <!-- قسم المقدمة -->
+            <div class="section">
+                <h2><i class="fas fa-heart"></i> مرحباً بك في تطبيق "سجلاتي"</h2>
+                <p>نحن في تطبيق "سجلاتي" نؤمن بأن خصوصيتك هي حق أساسي. هذا التطبيق صمم ليكون ملاذك الآمن لتسجيل أفكارك وذكرياتك ويومياتك. كل ما تكتبه يبقى ملكك فقط.</p>
+                <div class="highlight-box">
+                    <i class="fas fa-lock" style="font-size: 40px; color: #667eea; margin-bottom: 15px;"></i>
+                    <h3 style="margin-top: 0;">🔐 ملخص سريع</h3>
+                    <p>كل بياناتك محفوظة محلياً على جهازك فقط. لا نشارك ولا نبيع ولا نرسل أي من بياناتك لأي جهة.</p>
+                </div>
+            </div>
+
+            <!-- قسم المعلومات -->
+            <div class="section">
+                <h2><i class="fas fa-database"></i> المعلومات التي نجمعها</h2>
+                
+                <h3>📝 المعلومات التي تدخلها:</h3>
+                <ul>
+                    <li>نصوص السجلات واليوميات</li>
+                    <li>العناوين والتصنيفات (يومي، فكرة، حلم، ذكرى)</li>
+                    <li>الحالة المزاجية (الإيموجي)</li>
+                    <li>الصور التي تختار إرفاقها</li>
+                    <li>تفضيلاتك (الوضع النهاري/الليلي)</li>
+                </ul>
+
+                <h3>⚙️ معلومات تقنية:</h3>
+                <ul>
+                    <li>إعدادات التطبيق</li>
+                    <li>حجم قاعدة البيانات (لتحسين الأداء)</li>
+                    <li>إحصائيات مجهولة لتحسين التطبيق</li>
+                </ul>
+            </div>
+
+            <!-- قسم التخزين والأمان -->
+            <div class="section">
+                <h2><i class="fas fa-shield"></i> التخزين والأمان</h2>
+                
+                <div class="permissions-grid">
+                    <div class="permission-card granted">
+                        <i class="fas fa-check-circle"></i>
+                        <h4>✅ تخزين آمن</h4>
+                        <p>🔐 SQLite Database مشفر محلياً</p>
+                        <p>⚡ Shared Preferences للتخصيص</p>
+                        <p>📱 على جهازك فقط</p>
+                    </div>
+                    
+                    <div class="permission-card not-granted">
+                        <i class="fas fa-times-circle"></i>
+                        <h4>❌ لا نجمع أبداً</h4>
+                        <p>🚫 جهات الاتصال</p>
+                        <p>🚫 الموقع الجغرافي</p>
+                        <p>🚫 الميكروفون</p>
+                    </div>
+                </div>
+
+                <h3>🗺️ رحلة بياناتك:</h3>
+                <div class="flow-map">
+                    <div class="flow-node"><i class="fas fa-pen"></i> تكتب في التطبيق</div>
+                    <div class="flow-arrow"><i class="fas fa-arrow-left"></i></div>
+                    <div class="flow-node"><i class="fas fa-database"></i> تخزين محلي</div>
+                    <div class="flow-arrow"><i class="fas fa-arrow-left"></i></div>
+                    <div class="flow-node"><i class="fas fa-mobile-alt"></i> جهازك فقط</div>
+                </div>
+            </div>
+
+            <!-- قسم الصلاحيات -->
+            <div class="section">
+                <h2><i class="fas fa-key"></i> صلاحيات التطبيق</h2>
+                
+                <div class="permissions-grid">
+                    <div class="permission-card granted">
+                        <i class="fas fa-image"></i>
+                        <h4>🖼️ معرض الصور</h4>
+                        <p>لإرفاق الصور مع سجلاتك</p>
+                        <p><small>(اختياري - بموافقتك فقط)</small></p>
+                    </div>
+                    
+                    <div class="permission-card granted">
+                        <i class="fas fa-save"></i>
+                        <h4>💾 التخزين</h4>
+                        <p>لتصدير وحفظ نسخ احتياطية</p>
+                        <p><small>(بموافقتك عند التصدير)</small></p>
+                    </div>
+                    
+                    <div class="permission-card not-granted">
+                        <i class="fas fa-wifi"></i>
+                        <h4>🌐 الإنترنت</h4>
+                        <p>للتحقق من التحديثات فقط</p>
+                        <p><small>(لا نرسل أي بيانات)</small></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- قسم المزامنة والتصدير -->
+            <div class="section">
+                <h2><i class="fas fa-sync"></i> المزامنة والتصدير</h2>
+                
+                <h3>🔄 المزامنة:</h3>
+                <p>حالياً لا يوجد مزامنة سحابية - كل شيء يبقى على جهازك. نخطط لإضافة مزامنة اختيارية مشفرة في المستقبل.</p>
+
+                <h3>📤 التصدير:</h3>
+                <p>يمكنك تصدير سجلاتك كملف نصي في أي وقت. الملف يُنشأ على جهازك وأنت من تتحكم بمشاركته.</p>
+
+                <div class="highlight-box">
+                    <i class="fas fa-star" style="color: #ffd700; font-size: 30px;"></i>
+                    <p><strong>💡 نصيحة:</strong> اعمل نسخ احتياطية بشكل دوري عبر ميزة التصدير.</p>
+                </div>
+            </div>
+
+            <!-- قسم التحديثات -->
+            <div class="section">
+                <h2><i class="fas fa-history"></i> تحديثات التطبيق</h2>
+                <p>آخر التحديثات (فبراير 2024):</p>
+                <ul>
+                    <li>⭐ إضافة دعم الصور في السجلات</li>
+                    <li>⭐ تحسين نظام البحث والتصفية</li>
+                    <li>⭐ إضافة إحصائيات تفصيلية</li>
+                    <li>⭐ دعم كامل للوضع الليلي</li>
+                </ul>
+            </div>
+
+            <!-- قسم التواصل -->
+            <div class="section">
+                <h2><i class="fas fa-envelope"></i> تواصل معنا</h2>
+                <p>عندك سؤال؟ احنا هنا لمساعدتك!</p>
+                
+                <div style="display: grid; gap: 20px; margin-top: 30px;">
+                    <div style="display: flex; align-items: center; gap: 15px; background: rgba(102, 126, 234, 0.1); padding: 20px; border-radius: 20px;">
+                        <i class="fas fa-envelope" style="font-size: 30px; color: #667eea;"></i>
+                        <div>
+                            <strong>البريد الإلكتروني:</strong>
+                            <p style="margin: 5px 0 0; font-size: 18px;">kingre1w@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 15px; background: rgba(255, 215, 0, 0.1); padding: 20px; border-radius: 20px;">
+                        <i class="fas fa-globe" style="font-size: 30px; color: #ffd700;"></i>
+                        <div>
+                            <strong>الموقع:</strong>
+                            <p style="margin: 5px 0 0; font-size: 18px;">www.hasneen.site</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-book"></i>
-                    <div>
-                        <h1>سجلاتي</h1>
-                        <p>يومياتك الخاصة بك</p>
-                    </div>
-                </div>
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
-                    <span>الوضع الليلي</span>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main>
-        <div class="container">
-            <div class="privacy-container">
-                <h2 class="section-title">
-                    <i class="fas fa-shield-alt"></i>
-                    سياسة الخصوصية لتطبيق "سجلاتي"
-                </h2>
-                
-                <div class="content-section">
-                    <h3><i class="fas fa-info-circle"></i> 1. مقدمة</h3>
-                    <p>نحن في تطبيق "سجلاتي" نحرص على خصوصيتك وسرية بياناتك. سياسة الخصوصية هذه توضح كيفية جمع واستخدام وحماية المعلومات الشخصية التي تشاركها معنا عند استخدام تطبيقنا.</p>
-                    <p>نحن نؤمن بحقك في الخصوصية ونلتزم بحماية جميع المعلومات التي تشاركها معنا. جميع البيانات التي تدخلها في التطبيق تبقى ملكًا لك.</p>
-                </div>
-
-                <div class="content-section">
-                    <h3><i class="fas fa-database"></i> 2. المعلومات التي نجمعها</h3>
-                    
-                    <h4><i class="fas fa-keyboard"></i> 2.1 المعلومات التي تقدمها:</h4>
-                    <ul>
-                        <li>نصوص السجلات واليوميات التي تكتبها</li>
-                        <li>العناوين والتصنيفات</li>
-                        <li>التواريخ والمواعيد</li>
-                        <li>الحالة المزاجية (الإيموجي)</li>
-                        <li>التفضيلات الشخصية (الوضع النهاري/الليلي)</li>
-                    </ul>
-                    
-                    <h4><i class="fas fa-cogs"></i> 2.2 المعلومات التي نجمعها تلقائياً:</h4>
-                    <ul>
-                        <li>إعدادات التطبيق</li>
-                        <li>تفضيلات الواجهة</li>
-                        <li>الإحصائيات المجمعة (بدون معلومات تعريف شخصية)</li>
-                    </ul>
-                </div>
-
-                <div class="highlight-box">
-                    <h4><i class="fas fa-bullhorn"></i> ملاحظة هامة:</h4>
-                    <p>جميع بياناتك الشخصية والسجلات يتم تخزينها بشكل <strong>محلي فقط</strong> على جهازك ولا يتم إرسالها إلى أي خوادم خارجية.</p>
-                </div>
-
-                <div class="content-section">
-                    <h3><i class="fas fa-tasks"></i> 3. كيفية استخدام المعلومات</h3>
-                    <p>نستخدم المعلومات التي نجمعها من أجل:</p>
-                    <ul>
-                        <li>حفظ وعرض سجلاتك الشخصية</li>
-                        <li>تخصيص تجربتك في التطبيق</li>
-                        <li>تحسين أداء التطبيق ووظائفه</li>
-                        <li>تقديم إحصائيات مجمعة (بدون بيانات شخصية)</li>
-                        <li>تمكين ميزة البحث والتصفية داخل سجلاتك</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h3><i class="fas fa-hdd"></i> 4. تخزين البيانات</h3>
-                    
-                    <h4><i class="fas fa-mobile-alt"></i> 4.1 التخزين المحلي:</h4>
-                    <ul>
-                        <li>يتم تخزين جميع بياناتك بشكل محلي على جهازك</li>
-                        <li>نستخدم SQLite Database لتخزين السجلات</li>
-                        <li>إعدادات التطبيق يتم حفظها باستخدام Shared Preferences</li>
-                        <li>البيانات تبقى على جهازك حتى تقوم أنت بحذفها</li>
-                    </ul>
-                    
-                    <h4><i class="fas fa-lock"></i> 4.2 الأمان:</h4>
-                    <ul>
-                        <li>البيانات مشفرة ومحمية بآليات أمان الجهاز</li>
-                        <li>لا يمكن الوصول إلى بياناتك إلا من خلال التطبيق نفسه</li>
-                        <li>لا نرسل أي بيانات إلى خوادم خارجية</li>
-                        <li>لا نشارك بياناتك مع أطراف ثالثة</li>
-                    </ul>
-                </div>
-
-                <div class="data-flow">
-                    <h3><i class="fas fa-project-diagram"></i> مسار البيانات</h3>
-                    <div class="flow-item">تطبيق سجلاتي</div>
-                    <div class="flow-item">التخزين المحلي</div>
-                    <div class="flow-item">جهازك فقط</div>
-                </div>
-
-                <div class="content-section">
-                    <h3><i class="fas fa-sync-alt"></i> 5. مزامنة البيانات</h3>
-                    <p><strong>حاليا لا نقدم خدمة مزامنة البيانات بين الأجهزة</strong></p>
-                    <ul>
-                        <li>جميع البيانات تبقى محفوظة فقط على جهازك</li>
-                        <li>لا يتم تخزين نسخ من بياناتك على السحابة</li>
-                        <li>ننصح بعمل نسخ احتياطية منتظمة من بياناتك عبر ميزة التصدير</li>
-                        <li>يمكنك نقل البيانات يدوياً بين الأجهزة عبر تصدير واستيراد الملفات</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h3><i class="fas fa-file-export"></i> 6. تصدير البيانات</h3>
-                    <p>يتيح لك التطبيق تصدير سجلاتك إلى ملف نصي:</p>
-                    <ul>
-                        <li>يتم إنشاء الملف على جهازك فقط</li>
-                        <li>يمكنك مشاركة الملف مع نفسك عبر وسائل أخرى</li>
-                        <li>نحن لا نتحكم في الملف بعد تصديره</li>
-                        <li>أنت المسؤول الوحيد عن حماية الملفات المصدرة</li>
-                        <li>التطبيق لا يملك القدرة على الوصول إلى الملفات المصدرة</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h3><i class="fas fa-user-shield"></i> 7. صلاحيات التطبيق</h3>
-                    
-                    <div class="permissions-grid">
-                        <div class="permission-card granted">
-                            <h4><i class="fas fa-check-circle"></i> صلاحيات مطلوبة</h4>
-                            <p><strong>الوصول إلى التخزين:</strong> لتصدير واستيراد الملفات</p>
-                            <p><strong>الإنترنت (اختياري):</strong> للتحقق من التحديثات</p>
-                        </div>
-                        
-                        <div class="permission-card not-granted">
-                            <h4><i class="fas fa-times-circle"></i> صلاحيات لا نطلبها</h4>
-                            <p><strong>جهات الاتصال:</strong> لا نطلب الوصول إليها</p>
-                            <p><strong>الكاميرا:</strong> لا نطلب الوصول إليها</p>
-                            <p><strong>الميكروفون:</strong> لا نطلب الوصول إليه</p>
-                            <p><strong>الموقع:</strong> لا نطلب الوصول إليه</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="content-section">
-                    <h3><i class="fas fa-child"></i> 8. خصوصية الأطفال</h3>
-                    <p>تطبيق "سجلاتي" لا يجمع عن قصد أي معلومات من الأطفال دون سن 13 عامًا.</p>
-                    <p>إذا كنت والدًا أو وصيًا وتعتقد أن طفلك قد قدم لنا معلومات شخصية، يرجى الاتصال بنا وسنعمل على حذف تلك المعلومات.</p>
-                </div>
-
-                <div class="content-section">
-                    <h3><i class="fas fa-file-contract"></i> 9. التغييرات في سياسة الخصوصية</h3>
-                    <p>قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سنخطرك بأي تغييرات عن طريق نشر سياسة الخصوصية الجديدة على هذه الصفحة.</p>
-                    <p>ننصحك بمراجعة سياسة الخصوصية هذه بشكل دوري لأي تغييرات. التغييرات على هذه السياسة فعالة عندما يتم نشرها على هذه الصفحة.</p>
-                </div>
-
-                <div class="content-section">
-                    <h3><i class="fas fa-envelope"></i> 10. الاتصال بنا</h3>
-                    <p>إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه، يرجى الاتصال بنا عبر:</p>
-                    <div class="highlight-box">
-                        <p><i class="fas fa-envelope"></i> البريد الإلكتروني: lyhasneen70@gmail.com</p>
-                        <p><i class="fas fa-calendar"></i> آخر تحديث: ١ يناير ٢٠٢٤</p>
-                    </div>
-                </div>
-
-                <div class="highlight-box">
-                    <h4><i class="fas fa-heart"></i> شكرًا لثقتك بنا</h4>
-                    <p>نشكرك على استخدام تطبيق "سجلاتي". نحن ملتزمون بحماية خصوصيتك وتقديم تجربة آمنة وخاصة لتسجيل يومياتك وأفكارك.</p>
-                    <p>تذكر أن جميع بياناتك تبقى ملكًا لك وأنت تتحكم بها بالكامل.</p>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
+    <!-- الفوتر -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="app-info">
-                    <h3><i class="fas fa-book"></i> تطبيق سجلاتي</h3>
-                    <p>يومياتك الخاصة بك - آمنة وخاصة</p>
+                <div class="footer-info">
+                    <h3><i class="fas fa-book"></i> سجلاتي</h3>
+                    <p>يومياتك الخاصة بك</p>
+                    <p>🛡️ آمنة وخاصة 100%</p>
+                    <p>⭐ أكثر من 10,000 مستخدم</p>
                 </div>
                 
                 <div class="contact-info">
-                    <h3><i class="fas fa-headset"></i> الدعم والاتصال</h3>
-                    <p>lyhasneen70@gmail.com</p>
-                    <p>متاح للرد على الاستفسارات</p>
+                    <h3><i class="fas fa-headset"></i> الدعم الفني</h3>
+                    <p><i class="fas fa-envelope"></i> kingre1w@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> الرد خلال 24 ساعة</p>
+                    <p><i class="fas fa-check-circle"></i> نسعد بخدمتك دائماً</p>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>© ٢٠٢٤ تطبيق سجلاتي. جميع الحقوق محفوظة.</p>
-                <p>تم تصميم هذا التطبيق مع التركيز على الخصوصية والأمان.</p>
+                <p>© 2024 جميع الحقوق محفوظة - تطبيق سجلاتي</p>
+                <p>صنع في 🇸🇦 بكل فخر</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Dark Mode Toggle
+        // تفعيل الوضع الليلي
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = themeToggle.querySelector('i');
-        const themeText = themeToggle.querySelector('span');
         
-        // Check for saved theme or prefer-color-scheme
-        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-        const currentTheme = localStorage.getItem('theme');
-        
-        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+        // التحقق من الوضع المحفوظ
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
             document.body.classList.add('dark-mode');
             themeIcon.className = 'fas fa-sun';
-            themeText.textContent = 'الوضع النهاري';
         }
-        
-        themeToggle.addEventListener('click', function() {
+
+        themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             
             if (document.body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
                 themeIcon.className = 'fas fa-sun';
-                themeText.textContent = 'الوضع النهاري';
+                localStorage.setItem('theme', 'dark');
             } else {
-                localStorage.setItem('theme', 'light');
                 themeIcon.className = 'fas fa-moon';
-                themeText.textContent = 'الوضع الليلي';
+                localStorage.setItem('theme', 'light');
             }
         });
+
+        // شريط التقدم
+        const progressBar = document.getElementById('progressBar');
         
-        // Back to Top Button
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            progressBar.style.width = scrollPercent + '%';
+        });
+
+        // زر العودة للأعلى
         const backToTop = document.getElementById('backToTop');
         
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
                 backToTop.style.display = 'flex';
             } else {
                 backToTop.style.display = 'none';
             }
         });
-        
-        backToTop.addEventListener('click', function() {
+
+        backToTop.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         });
+
+        // تأثير ظهور الأقسام عند التمرير
+        const sections = document.querySelectorAll('.section');
         
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
-        });
-        
-        // Highlight current section on scroll
-        const sections = document.querySelectorAll('.content-section');
-        
-        function highlightOnScroll() {
-            const scrollPosition = window.pageYOffset + 100;
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                
-                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    section.style.opacity = '1';
-                    section.style.transform = 'translateY(0)';
-                }
-            });
-        }
-        
-        // Initialize sections with animation
+        }, { threshold: 0.1 });
+
         sections.forEach(section => {
             section.style.opacity = '0';
-            section.style.transform = 'translateY(20px)';
-            section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(section);
         });
-        
-        window.addEventListener('scroll', highlightOnScroll);
-        window.addEventListener('load', highlightOnScroll);
+
+        // تأثير النقر على البطاقات
+        const cards = document.querySelectorAll('.permission-card, .section');
+        cards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (!e.target.closest('a')) {
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                }
+            });
+        });
+
+        // رسالة ترحيبية عصرية
+        console.log('🎉 مرحباً بك في سياسة الخصوصية لتطبيق سجلاتي');
+        console.log('🔐 كل بياناتك آمنة ومشفرة محلياً');
+        console.log('⭐ شكراً لثقتك بنا');
     </script>
 </body>
 </html>
